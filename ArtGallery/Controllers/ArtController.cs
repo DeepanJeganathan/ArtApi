@@ -22,9 +22,9 @@ namespace ArtGallery.Controllers
         }
         // GET: api/Art
         [HttpGet]
-        public ActionResult<IList<ArtModel>> Get()
+        public ActionResult<IList<ArtModel>> Get([FromQuery] ArtParameters artParameters )
         {
-            return _art.GetAll().ToList();
+            return _art.GetAll(artParameters).ToList();
         }
 
         // GET: api/Art/5
