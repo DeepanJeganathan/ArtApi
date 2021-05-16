@@ -17,9 +17,9 @@ namespace ArtGallery.Repository
             this._artGalleryDbContext = artGalleryDbContext;
         }
 
-        public IList<ArtModel> GetAll()
+        public IList<ArtModel> GetAll(ArtParameters artParameters)
         {
-            return _artGalleryDbContext.ArtModels.Take(10).ToList();
+            return _artGalleryDbContext.ArtModels.Skip((artParameters.PageNumber - 1) * (artParameters.PageSize)).Take(artParameters.PageSize).ToList();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace ArtGallery.Service
     public interface IArt
     {
 
-        IList<ArtModel> GetAll();
+        IList<ArtModel> GetAll(ArtParameters artParameters);
 
     }
 }
