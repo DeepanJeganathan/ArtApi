@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ArtGallery.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Art")]
     [ApiController]
     public class ArtController : ControllerBase
     {
@@ -22,14 +22,21 @@ namespace ArtGallery.Controllers
         }
         // GET: api/Art
         [HttpGet]
-        public ActionResult<IList<ArtModel>> Get([FromQuery] ArtParameters artParameters )
+        public ActionResult<IList<ArtModel>> Get([FromQuery] ArtParameters artParameters, string search )
         {
-            return _art.GetAll(artParameters).ToList();
+           
+            return _art.GetAll(artParameters,search).ToList();
         }
 
+        [HttpGet("total")]
+        public  ActionResult<int> GetTotalItems()
+        {
+
+            return _art.Count();
+        }
         // GET: api/Art/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("{id}")]
+        public string GetById(int id)
         {
             return "value";
         }

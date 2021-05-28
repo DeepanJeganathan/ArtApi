@@ -15,7 +15,7 @@ namespace ArtGallery.Models
         public string Name { get; set; }
 
         [Required]
-        [MinLength(50)]
+        [MinLength(10)]
         public string  Post { get; set; }
 
         public DateTime Date { get; set; }

@@ -32,10 +32,12 @@ namespace ArtGallery
             services.AddControllers();
             services.AddDbContext<ArtGalleryDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DataBaseConnection")));
             services.AddScoped<IArt, ArtRepository>();
+            services.AddScoped<IComment, CommentRepository>();
+
             services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder.WithOrigins("http://localhost:3000/")
+            options.AddPolicy("CorsPolicy",
+                builder => builder.WithOrigins("http://localhost:3000/", "http://localhost:44380/")
                         .AllowAnyMethod()
                         .AllowAnyHeader().AllowAnyOrigin()
                         );

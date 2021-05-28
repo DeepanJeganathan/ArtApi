@@ -1,4 +1,5 @@
 ﻿using ArtGallery.Data;
+using ArtGallery.DTOs;
 using ArtGallery.Models;
 using ArtGallery.Service;
 using System;
@@ -17,9 +18,23 @@ namespace ArtGallery.Repository
             this._artGalleryDbContext = artGalleryDbContext;
         }
 
-        public IList<ArtModel> GetAll(ArtParameters artParameters)
+        public int Count()
         {
-            return _artGalleryDbContext.ArtModels.Skip((artParameters.PageNumber - 1) * (artParameters.PageSize)).Take(artParameters.PageSize).ToList();
+            return _artGalleryDbContext.ArtModels.Count();
+        }
+
+        public IList<ArtModel> GetAll(ArtParameters artParameters, string search)
+        {
+            
+
+            if (string.IsNullOrEmpty(search))
+
+            {
+                return _artGalleryDbContext.ArtModels.Skip((artParameters.PageNumber - 1) * (artParameters.PageSize)).Take(artParameters.PageSize).ToList();
+              
+            }
+            return _artGalleryDbContext.ArtModels.Where(x=>x.Title.Contains(search)).Skip((artParameters.PageNumber - 1) * (artParameters.PageSize)).Take(artParameters.PageSize).ToList();
+
         }
     }
 }
