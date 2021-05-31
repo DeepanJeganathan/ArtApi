@@ -28,10 +28,10 @@ namespace ArtGallery.Controllers
         }
 
         // GET: api/Comment/5
-        [HttpGet("{id}")]
-        public ActionResult<Comment> GetById(int id)
+        [HttpGet("{artId}")]
+        public ActionResult<List<Comment>> Get(int artId)
         {
-            return _comment.Get(id);
+            return _comment.Get(artId);
         }
 
         // POST: api/Comment
@@ -42,6 +42,8 @@ namespace ArtGallery.Controllers
             {
                 return BadRequest(ModelState);
             }
+            comment.Date = DateTime.Now;
+
             if (!_comment.CreateComment(comment))
             {
                 ModelState.AddModelError("", " error in saving comment");
@@ -60,7 +62,7 @@ namespace ArtGallery.Controllers
             {
                 return NotFound();
             }
-            var comment = _comment.Get(id);
+            var comment = _comment.GetById(id);
 
             if (!_comment.DeleteComment(comment))
             {

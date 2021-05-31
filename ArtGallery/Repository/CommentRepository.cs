@@ -34,14 +34,19 @@ namespace ArtGallery.Repository
             return save();
         }
 
-        public Comment Get(int id)
+        public List<Comment> Get(int artId)
         {
-            return _context.Comments.FirstOrDefault(x => x.CommentId == id);
+            return _context.Comments.Where(x=>x.ArtModelId==artId).ToList();
         }
 
         public List<Comment> GetAll()
         {
             return _context.Comments.ToList();
+        }
+
+        public Comment GetById(int id)
+        {
+            return _context.Comments.FirstOrDefault(x => x.CommentId == id);
         }
 
         public bool save()
