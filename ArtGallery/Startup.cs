@@ -36,8 +36,9 @@ namespace ArtGallery
 
             services.AddCors(options =>
             {
+                //.WithOrigins("http://localhost:3000/", "http://localhost:44380/")
             options.AddPolicy("CorsPolicy",
-                builder => builder.WithOrigins("http://localhost:3000/", "http://localhost:44380/")
+                builder => builder
                         .AllowAnyMethod()
                         .AllowAnyHeader().AllowAnyOrigin()
                         );
